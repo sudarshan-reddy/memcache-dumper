@@ -12,10 +12,7 @@ impl Dumper {
 
     pub fn dump_key_to_file<W: Write>(&mut self, key: &str, mut writer: W) -> Result<(), Error> {
         let value: Option<Vec<u8>> = self.client.get(key)?;
-        match value {
-            Some(v) => writer.write(&v)?,
-            None => 0,
-        };
+        value.and_then(|v| Some(writer.write(&v)));
         Ok(())
     }
 }
