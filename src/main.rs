@@ -6,4 +6,7 @@ fn main() {
         .expect("dumper init failed");
     let f = File::open("test.file").expect("open failed");
     d.load_key_from_file("test", f).expect("load failed");
+
+    let f2 = File::create("op.file").expect("create f2 failed");
+    d.dump_key_to_file("test", f2).expect("save failed");
 }
